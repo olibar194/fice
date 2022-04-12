@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.negro {
+  fill: black;
+  width: 1.83rem;
+  height: 1.83rem;
+}
+.negro:hover {
+  fill: white;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+html {
+  overflow-x: hidden;
+  font-family: 'din';
+}
+
+header {
+  overflow-x: hidden;
+}
+#root {
+  white-space: pre-line;
+}
+@font-face {
+  font-family: 'din';
+  src: local('din'), url('./../public/fonts/DIN.otf') format('truetype');
+  font-weight: regular;
+}
+
+@font-face {
+  font-family: 'd-din';
+  src: local('d-din'), url('./../public/fonts/D-DIN.otf') format('truetype');
+}
+@font-face {
+  font-family: 'kiona';
+  src: local('kiona'), url('./../public/fonts/Kiona.ttf') format('truetype');
+}
