@@ -1,9 +1,10 @@
-import {UserIcon} from '@sanity/icons'
+import { UserIcon } from '@sanity/icons'
 
 export default {
   name: 'person',
   title: 'Person',
   type: 'document',
+  localize: false,
   icon: UserIcon,
   fields: [
     {
@@ -11,6 +12,16 @@ export default {
       title: 'Name',
       type: 'string',
       description: 'Please use "Firstname Lastname" format',
+      validation: (Rule) => {
+        Rule.required()
+      },
+    },
+    {
+      description: 'Utilizar roles en español',
+      name: 'role',
+      title: 'Rol',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'role' } }],
     },
     {
       name: 'slug',
@@ -20,6 +31,7 @@ export default {
         source: 'name',
         maxLength: 100,
       },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'image',
@@ -29,8 +41,13 @@ export default {
         hotspot: true,
       },
     },
+    {
+      name: 'bio',
+      title: 'Bio',
+      type: 'localeBlock',
+    },
   ],
   preview: {
-    select: {title: 'name', media: 'image'},
+    select: { title: 'name', media: 'image' },
   },
 }

@@ -1,29 +1,35 @@
-import {MdLocalMovies as icon} from 'react-icons/md'
+import { MdLocalMovies as icon, MdPeopleAlt } from 'react-icons/md'
+import { slugWithType } from '../slugWithType'
+import edition from './edition'
 
-export default {
-  name: 'movie',
-  title: 'Movie',
+export const activity = {
+  name: 'activity',
+  title: 'Actividad',
   type: 'document',
-  icon,
+  icon: MdPeopleAlt,
   fields: [
     {
       name: 'title',
-      title: 'Title',
-      type: 'string',
+      title: 'Título',
+      type: 'localeString',
+      validation: (Rule) =>
+        Rule.fields({
+          es: (fieldRule) => fieldRule.required(),
+        }),
     },
     {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 100,
-      },
+      name: 'edition',
+      title: 'Edición',
+      type: 'reference',
+      to: { type: 'edition' },
+      validation: (Rule) => Rule.required(),
     },
+
+    slugWithType(`activity`, `title`, 'es'),
     {
       name: 'overview',
       title: 'Overview',
-      type: 'blockContent',
+      type: 'localeBlock',
     },
     {
       name: 'releaseDate',
@@ -36,11 +42,6 @@ export default {
       type: 'number',
     },
     {
-      name: 'popularity',
-      title: 'Popularity',
-      type: 'number',
-    },
-    {
       name: 'poster',
       title: 'Poster Image',
       type: 'image',
@@ -48,30 +49,33 @@ export default {
         hotspot: true,
       },
     },
+
     {
       name: 'castMembers',
       title: 'Cast Members',
       type: 'array',
-      of: [{type: 'castMember'}],
+      of: [{ type: 'reference', to: { type: 'person' } }],
     },
     {
       name: 'crewMembers',
       title: 'Crew Members',
       type: 'array',
-      of: [{type: 'crewMember'}],
+      of: [{ type: 'reference', to: { type: 'person' } }],
     },
   ],
   preview: {
     select: {
-      title: 'title',
-      date: 'releaseDate',
+      title: 'title.es',
+      date: 'edition.slug.current',
       media: 'poster',
       castName0: 'castMembers.0.person.name',
       castName1: 'castMembers.1.person.name',
     },
     prepare(selection) {
       const year = selection.date && selection.date.split('-')[0]
-      const cast = [selection.castName0, selection.castName1].filter(Boolean).join(', ')
+      const cast = [selection.castName0, selection.castName1]
+        .filter(Boolean)
+        .join(', ')
 
       return {
         title: `${selection.title} ${year ? `(${year})` : ''}`,

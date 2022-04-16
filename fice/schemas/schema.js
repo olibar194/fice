@@ -4,33 +4,44 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // We import object and document schemas
-import blockContent from './blockContent'
-import crewMember from './crewMember'
-import castMember from './castMember'
-import movie from './movie'
-import person from './person'
-import screening from './screening'
-import plotSummary from './plotSummary'
-import plotSummaries from './plotSummaries'
+import richText from './objects/richText'
+// import openGraph from './objects/openGraph'
+// import captionImage from './objects/captionImage'
+// import blockContent from './objects/blockContent'
+// import crewMember from './documents/crewMember'
+// import castMember from './documents/castMember'
+// import movie from './documents/movie'
+import person from './objects/person'
 
-// Then we give our schema to the builder and provide the result to Sanity
+import home from './objects/home'
+
+import role from './objects/role'
+import screening from './documents/screening'
+// import plotSummary from './documents/plotSummary'
+// import plotSummaries from './documents/plotSummaries'
+import edition from './documents/edition'
+import { translateFields } from './fieldTranslation'
+import { localeString } from './objects/localeString'
+import { localeBlock } from './objects/localeBlock'
+import { movie } from './documents/movie'
+import { activity } from './documents/activity'
+
 export default createSchema({
-  // We name our schema
   name: 'default',
-  // Then proceed to concatenate our document type
-  // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
-    // The following are document types which will appear
-    // in the studio.
-    movie,
-    person,
+    // Any base object you've defined,
+    // or document type that should not have
+    // field-level validations
+    localeBlock,
+    localeString,
+    activity,
     screening,
-    // When added to this list, object types can be used as
-    // { type: 'typename' } in other document schemas
-    blockContent,
-    plotSummary,
-    plotSummaries,
-    castMember,
-    crewMember,
+    role,
+    person,
+    richText,
+    movie,
+    edition,
+    home,
   ]),
+  // .concat(translateFields([ ])),
 })
