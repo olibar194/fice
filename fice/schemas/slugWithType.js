@@ -5,8 +5,8 @@ import client from 'part:@sanity/base/client'
 async function getEdition(ref) {
   console.log(ref, 'ref')
   let edi = await client.fetch(`*[_type == "edition" && _id == "${ref}"]`)
-  console.log(edi[0].slug.current)
-  return edi[0].slug.current
+  console.log(edi[0].year)
+  return edi[0].year
 }
 
 function formatSlug(input) {
@@ -17,7 +17,8 @@ function formatSlug(input) {
 function parseSlug(input) {
   return input
 }
-export function slugWithType(prefix = ``, source = `title`, lang = '') {
+export function slugWithType(prefix = ``, source = `title`, lang = '', doc) {
+  console.log(doc)
   const slugStart = prefix ? `/${prefix}/` : `/`
   const specificLang = lang
 
@@ -28,6 +29,7 @@ export function slugWithType(prefix = ``, source = `title`, lang = '') {
       isUnique: isUniqueAcrossAllDocuments,
       source: async (doc) => {
         const edition = await getEdition(doc.edition._ref)
+
         // console.log(
         //   '/' + formatSlug(edition) + slugStart + formatSlug(doc[`${source}`])
         // )

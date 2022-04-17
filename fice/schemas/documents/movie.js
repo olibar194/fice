@@ -1,6 +1,5 @@
 import { MdLocalMovies as icon } from 'react-icons/md'
 import { slugWithType } from '../slugWithType'
-import edition from './edition'
 
 export const movie = {
   name: 'movie',
@@ -73,13 +72,13 @@ export const movie = {
   preview: {
     select: {
       title: 'original',
-      date: 'releaseDate',
+      date: 'slug.current',
       media: 'poster',
       castName0: 'castMembers.0.person.name',
       castName1: 'castMembers.1.person.name',
     },
     prepare(selection) {
-      const year = selection.date && selection.date.split('-')[0]
+      const year = selection.date && selection.date.split('/')[1]
       const cast = [
         selection.director,
         selection.castName0,

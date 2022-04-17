@@ -13,8 +13,6 @@ import richText from './objects/richText'
 // import movie from './documents/movie'
 import person from './objects/person'
 
-import home from './objects/home'
-
 import role from './objects/role'
 import screening from './documents/screening'
 // import plotSummary from './documents/plotSummary'
@@ -41,7 +39,6 @@ export default createSchema({
     richText,
     movie,
     edition,
-    home,
   ]),
   // .concat(translateFields([ ])),
 })
