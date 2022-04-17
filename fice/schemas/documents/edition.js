@@ -41,7 +41,6 @@ export default {
           to: { type: 'movie' },
           validation: (Rule) => [
             Rule.custom(async (document, parent) => {
-              console.log(document)
               let bool = await sameEdiciton(document, parent)
               if (bool) return bool
               else {
@@ -52,7 +51,11 @@ export default {
         },
       ],
       validation: (Rule) => [
-        Rule.required().min(1).error('Required field with at least 1 entry'),
+        Rule.required()
+          .min(1)
+          .max(2)
+          .error('Required field with at least 1 and at most 2 entries.'),
+        Rule.unique(),
       ],
     },
   ],
@@ -63,9 +66,18 @@ export default {
 
 import client from 'part:@sanity/base/client'
 
+// const notExist = async (document, parent) => {
+//   console.log(document, parent)
+//   let array = parent.document[parent.path[0]]
+//   console.log(array)
+
+//   if (!array.includes(document[0])) return true
+//   else {
+//     return 'Ya existe en la lista'
+//   }
+// }
 const sameEdiciton = async (document, parent) => {
   let edi = await client.fetch(`*[_id == "${document._ref}"]`)
-  console.log(edi[0].slug.current.split('/')[1] === parent.document.year)
   let bool = edi[0].slug.current.split('/')[1] === parent.document.year
 
   return bool
