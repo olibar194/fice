@@ -25,13 +25,14 @@ export default {
     },
     {
       name: 'slug',
-      title: 'Slug',
+      title: 'URL',
       type: 'slug',
+      description:
+        'generar URL para disponer de un enlace a la página de la persona, sino dejar vacío',
       options: {
         source: 'name',
         maxLength: 100,
       },
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'image',

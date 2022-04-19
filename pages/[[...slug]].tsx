@@ -5,6 +5,7 @@ import { groq } from 'next-sanity'
 import { PortableText } from '@portabletext/react'
 import { usePreviewSubscription, urlFor } from '../lib/sanity'
 import { getClient } from '../lib/sanity.server'
+import { UrlObject } from 'url'
 
 const movieQuery = groq`
   *[_type == "movie" && slug.current == $slug][0] {
@@ -102,8 +103,9 @@ export async function getStaticProps({ params }: any) {
 
 export async function getStaticPaths() {
   const paths = await getClient().fetch(
-    groq`*[_type in ["movie", "home"] && defined(slug.current)][].slug.current`
+    groq`*[_type in ["edition", "movies", "person" ] && defined(slug.current)][].slug.current`
   )
+
   // Split the slug strings to arrays (as required by Next.js)
   const paths2 = paths.map((slug: string) => ({
     params: { slug: slug.split('/').filter((p) => p) },

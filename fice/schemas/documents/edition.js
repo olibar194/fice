@@ -16,8 +16,9 @@ export default {
     },
     {
       name: 'slug',
-      title: 'Slug',
+      title: 'URL',
       type: 'slug',
+      description: "Dejar '/' en la edición del home",
       options: {
         source: 'year',
       },
@@ -30,6 +31,23 @@ export default {
       options: {
         hotspot: true,
       },
+    },
+    {
+      name: 'jury',
+      title: 'Juradx',
+      type: 'reference',
+      to: { type: 'jury' },
+      validation: (Rule) =>
+        Rule.custom(async (document, parent) => {
+          let bool
+          !!document
+            ? (bool = await sameEdiciton(document, parent))
+            : (bool = true)
+          if (bool) return bool
+          else {
+            return 'No es del mismo año'
+          }
+        }),
     },
     {
       name: 'movies',
@@ -66,7 +84,7 @@ export default {
 
 import client from 'part:@sanity/base/client'
 
-// const notExist = async (document, parent) => {
+// const notExist = async (document, parent) => {d
 //   console.log(document, parent)
 //   let array = parent.document[parent.path[0]]
 //   console.log(array)
@@ -79,6 +97,6 @@ import client from 'part:@sanity/base/client'
 const sameEdiciton = async (document, parent) => {
   let edi = await client.fetch(`*[_id == "${document._ref}"]`)
   let bool = edi[0].slug.current.split('/')[1] === parent.document.year
-
+  console.log('es de edition', edi)
   return bool
 }

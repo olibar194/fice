@@ -15,6 +15,8 @@ import person from './objects/person'
 
 import role from './objects/role'
 import screening from './documents/screening'
+import jury from './documents/jury'
+
 // import plotSummary from './documents/plotSummary'
 // import plotSummaries from './documents/plotSummaries'
 import edition from './documents/edition'
@@ -31,6 +33,7 @@ export default createSchema({
     // or document type that should not have
     // field-level validations
     localeBlock,
+    jury,
     localeString,
     activity,
     screening,
