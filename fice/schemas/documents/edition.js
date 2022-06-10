@@ -33,49 +33,99 @@ export default {
       },
     },
     {
-      name: 'jury',
-      title: 'Juradx',
-      type: 'reference',
-      to: { type: 'jury' },
-      validation: (Rule) =>
-        Rule.custom(async (document, parent) => {
-          let bool
-          !!document
-            ? (bool = await sameEdiciton(document, parent))
-            : (bool = true)
-          if (bool) return bool
-          else {
-            return 'No es del mismo año'
-          }
-        }),
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      oprtions: {
+        hotspot: true,
+      },
+    },
+
+    {
+      name: 'color_p',
+      title: 'colorPrimario',
+      type: 'string',
     },
     {
-      name: 'movies',
-      title: 'Movies',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: { type: 'movie' },
-          validation: (Rule) => [
-            Rule.custom(async (document, parent) => {
-              let bool = await sameEdiciton(document, parent)
-              if (bool) return bool
-              else {
-                return 'No es del mismo año'
-              }
-            }),
-          ],
-        },
-      ],
-      validation: (Rule) => [
-        Rule.required()
-          .min(1)
-          .max(2)
-          .error('Required field with at least 1 and at most 2 entries.'),
-        Rule.unique(),
-      ],
+      name: 'color_s',
+      title: 'colorSecundario',
+      type: 'string',
     },
+    {
+      name: 'color_t',
+      title: 'colorTerciario',
+      type: 'string',
+    },
+    {
+      name: 'info',
+      title: 'Info home',
+      type: 'richText',
+    },
+
+    // {
+    //   name: 'activities',
+    //   title: 'Actividades',
+    //   type: 'reference',
+    //   to: { type: 'activities' },
+    //   validation: (Rule) =>
+    //     Rule.custom(async (document, parent) => {
+    //       let bool
+    //       !!document
+    //         ? (bool = await sameEdiciton(document, parent))
+    //         : (bool = true)
+    //       if (bool) return bool
+    //       else {
+    //         return 'No es del mismo año'
+    //       }
+    //     }),
+    // },
+    // {
+    //   name: 'jury',
+    //   title: 'Juradx',
+    //   type: 'reference',
+    //   to: { type: 'jury' },
+    //   validation: (Rule) =>
+    //     Rule.custom(async (document, parent) => {
+    //       let bool
+    //       !!document
+    //         ? (bool = await sameEdiciton(document, parent))
+    //         : (bool = true)
+    //       if (bool) return bool
+    //       else {
+    //         return 'No es del mismo año'
+    //       }
+    //     }),
+    // },
+    // {
+    //   name: 'awards',
+    //   title: 'Premios',
+    //   type: 'reference',
+    //   to: { type: 'awards' },
+    // },
+    // {
+    //   name: 'movies',
+    //   title: 'Movies',
+    //   type: 'array',
+    //   of: [
+    //     {
+    //       type: 'reference',
+    //       to: { type: 'movie' },
+    //       validation: (Rule) => [
+    //         Rule.custom(async (document, parent) => {
+    //           let bool = await sameEdiciton(document, parent)
+    //           if (bool) return bool
+    //           else {
+    //             return 'No es del mismo año'
+    //           }
+    //         }),
+    //       ],
+    //     },
+    //   ],
+    //   validation: (Rule) => [
+    //     Rule.required().min(1).error('Required field with at least 1 entrie.'),
+    //     Rule.unique(),
+    //   ],
+    // },
   ],
   preview: {
     select: { title: 'year', media: 'image' },

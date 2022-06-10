@@ -1,4 +1,5 @@
 import { UserIcon } from '@sanity/icons'
+import { slugWithType } from '../slugWithType'
 
 export default {
   name: 'person',
@@ -23,17 +24,18 @@ export default {
       type: 'array',
       of: [{ type: 'reference', to: { type: 'role' } }],
     },
-    {
-      name: 'slug',
-      title: 'URL',
-      type: 'slug',
-      description:
-        'generar URL para disponer de un enlace a la página de la persona, sino dejar vacío',
-      options: {
-        source: 'name',
-        maxLength: 100,
-      },
-    },
+    slugWithType('person', ''),
+    // {
+    //   name: 'slug',
+    //   title: 'URL',
+    //   type: 'slug',
+    //   description:
+    //     'generar URL para disponer de un enlace a la página de la persona, sino dejar vacío',
+    //   options: {
+    //     source: 'name',
+    //     maxLength: 100,
+    //   },
+    // },
     {
       name: 'image',
       title: 'Image',

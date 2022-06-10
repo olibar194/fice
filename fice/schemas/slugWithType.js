@@ -25,10 +25,17 @@ export function slugWithType(prefix = ``, source = '', lang = '') {
   return {
     name: `slug`,
     type: `slug`,
+    title: 'Url',
     options: {
       isUnique: isUniqueAcrossAllDocuments,
       source: async (doc) => {
-        const edition = await getEdition(doc.edition._ref)
+        //
+        let edition
+        if (!!doc.edition) {
+          console.log(doc)
+          edition = await getEdition(doc.edition._ref)
+        }
+
         if (source !== '') {
           return (
             '/' +
@@ -45,7 +52,7 @@ export function slugWithType(prefix = ``, source = '', lang = '') {
       slugify: (value) => parseSlug(value),
     },
     validation: (Rule) =>
-      Rule.required().custom(({ current }) => {
+      Rule.custom(({ current }) => {
         // if (typeof current === 'undefined') {
         //   return true
         // }

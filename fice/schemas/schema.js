@@ -11,30 +11,45 @@ import richText from './objects/richText'
 // import crewMember from './documents/crewMember'
 // import castMember from './documents/castMember'
 // import movie from './documents/movie'
-import person from './objects/person'
+import person from './documents/person'
 
-import role from './objects/role'
+import role from './documents/role'
 import screening from './documents/screening'
 import jury from './documents/jury'
 
 // import plotSummary from './documents/plotSummary'
 // import plotSummaries from './documents/plotSummaries'
+// import genre from './documents/genre'
 import edition from './documents/edition'
-import { translateFields } from './fieldTranslation'
+import gallery from './objects/gallery'
+
 import { localeString } from './objects/localeString'
 import { localeBlock } from './objects/localeBlock'
 import { movie } from './documents/movie'
 import { activity } from './documents/activity'
+import awards from './documents/awards'
+import award from './objects/award'
+
+import country from './documents/country'
+import island from './documents/island'
+import competition from './objects/competition'
+
+import producer from './documents/producer'
+
+import hashtag from './documents/hashtag'
 
 export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
-    // Any base object you've defined,
-    // or document type that should not have
-    // field-level validations
+    competition,
+    island,
+    hashtag,
+    award,
+    awards,
     localeBlock,
     jury,
     localeString,
+    producer,
     activity,
     screening,
     role,
@@ -42,6 +57,7 @@ export default createSchema({
     richText,
     movie,
     edition,
+    country,
+    gallery,
   ]),
-  // .concat(translateFields([ ])),
 })

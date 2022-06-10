@@ -11,7 +11,18 @@ export default {
       title: 'Title',
       type: 'localeString',
       description: 'E.g.: Our first ever screening of Gattaca',
+      validation: (Rule) => Rule.required(),
     },
+    {
+      name: 'slug',
+      title: 'URL',
+      type: 'slug',
+      options: {
+        source: 'title.es',
+      },
+      validation: (Rule) => Rule.required(),
+    },
+
     {
       name: 'movie',
       title: 'Movie',

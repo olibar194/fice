@@ -1,13 +1,13 @@
 import { UserIcon } from '@sanity/icons'
 import { array } from 'prop-types'
-import { AiOutlineCarryOut } from 'react-icons/ai'
+import { BiUserVoice } from 'react-icons/bi'
 import { slugWithType } from '../slugWithType'
 
 export default {
   name: 'jury',
   title: 'Jurado',
   type: 'document',
-  icon: AiOutlineCarryOut,
+  icon: BiUserVoice,
   fields: [
     {
       name: 'edition',

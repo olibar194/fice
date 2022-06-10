@@ -5,7 +5,7 @@ import { groq } from 'next-sanity'
 import { PortableText } from '@portabletext/react'
 import { usePreviewSubscription, urlFor } from '../lib/sanity'
 import { getClient } from '../lib/sanity.server'
-import { UrlObject } from 'url'
+import dynamic from 'next/dynamic'
 
 const movieQuery = groq`
   *[_type == "movie" && slug.current == $slug][0] {
@@ -17,23 +17,25 @@ const movieQuery = groq`
   }
 `
 
-export default function movie({ data }: any) {
-  const router = useRouter()
+const Home = dynamic(() => import('../components/layouts/Home'))
+const PageSingle = dynamic(() => import('../components/layouts/Page'))
 
-  // const { data: movie } = usePreviewSubscription(movieQuery, {
-  //   params: { slug: data.movie?.slug?.current },
-  //   initialData: data?.movie,
-  //   enabled: preview && data.movie?.slug?.current,
-  // })
+export default function Page({ data, preview }: any) {
+  const { data: pageData } = usePreviewSubscription(data?.query, {
+    params: data?.queryParams ?? {},
+    initialData: data?.pageData,
+    enabled: preview,
+  })
 
-  console.log(data)
+  const { docType } = data
+
+  console.log(data, docType)
 
   return (
-    <article>
-      <h2>fice</h2>
-      {/* <figure>{!!poster && <img src={urlFor(poster).url()} />}</figure>
-      <PortableText value={overview} /> */}
-    </article>
+    <>
+      {docType === 'home' && <Home page={pageData} />}
+      {docType === 'page' && <PageSingle page={pageData} />}
+    </>
   )
 }
 
@@ -52,12 +54,13 @@ function getQueryFromSlug(slugArray = []) {
   if (slugArray.length === 0) {
     return {
       docType: 'home',
-      queryParams: {},
+      queryParams: { slug: '/' },
       query: docQuery.home,
     }
   }
 
   const [slugStart] = slugArray
+  console.log(slugStart, 'slugstart')
 
   // We now have to re-combine the slug array to match our slug in Sanity.
   let queryParams = { slug: `/${slugArray.join('/')}` }
@@ -81,18 +84,17 @@ export async function getStaticProps({ params }: any) {
   const client = await getClient()
 
   // Every website has a bunch of global content that every page needs, too!
+
   // const globalSettings = await client.fetch(globalSettingsQuery)
 
   // A helper function to work out what query we should run based on this slug
-  console.log('params', params)
 
   const { query, queryParams, docType } = getQueryFromSlug(params.slug)
-
-  // console.log(query, queryParams, docType)
 
   const query2 = groq`*[_type == "movie" && slug.current == '/2022/movies/pi'][0]`
   // Get the initial data for this page, using the correct query
   const pageData = await client.fetch(query2)
+  // const pageData = await client.fetch(query, queryParams)
 
   return {
     props: {
@@ -103,7 +105,7 @@ export async function getStaticProps({ params }: any) {
 
 export async function getStaticPaths() {
   const paths = await getClient().fetch(
-    groq`*[_type in ["edition", "movies", "person" ] && defined(slug.current)][].slug.current`
+    groq`*[_type in ["edition", "movies", "person", 'jury', 'activity', 'activities', 'awards', 'screening' ] && defined(slug.current)][].slug.current`
   )
 
   // Split the slug strings to arrays (as required by Next.js)
