@@ -14,7 +14,7 @@ export default {
   ],
   preview: {
     select: {
-      title: 'name.en',
+      title: 'name.es',
     },
   },
 }

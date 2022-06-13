@@ -32,15 +32,20 @@ export default {
     {
       name: 'winner',
       title: 'Ganador',
-      type: 'reference',
-      to: { type: 'movie' },
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: { type: 'movie' },
+        },
+      ],
       validation: (Rule) => Rule.required(),
     },
   ],
   preview: {
     select: {
       title: 'award.es',
-      subtitle: 'winner.original',
+      subtitle: 'winner.0.original',
     },
   },
 }

@@ -19,7 +19,6 @@ function parseSlug(input) {
 }
 export function slugWithType(prefix = ``, source = '', lang = '') {
   const slugStart = prefix ? `/${prefix}/` : `/`
-  const specificLang = lang
   const slugEnd = source === '' ? `/${prefix}` : `/`
 
   return {
@@ -32,7 +31,6 @@ export function slugWithType(prefix = ``, source = '', lang = '') {
         //
         let edition
         if (!!doc.edition) {
-          console.log(doc)
           edition = await getEdition(doc.edition._ref)
         }
 
@@ -53,25 +51,68 @@ export function slugWithType(prefix = ``, source = '', lang = '') {
     },
     validation: (Rule) =>
       Rule.custom(({ current }) => {
-        // if (typeof current === 'undefined') {
-        //   return true
-        // }
-
         if (current) {
-          // if (!current.startsWith(edition)) {
-          //   return `Slug must begin with "${edtion}". Click "Generate" to reset.`
-          // }
+          if (current.endsWith('/')) {
+            return `Slug cannot end with "/"`
+          } else {
+            return true
+          }
+        } else {
+          return false
+        }
+      }),
+  }
+}
 
-          // if (current.slice(edition.length).split('').includes('/')) {
-          //   return `Slug cannot have another "/" after "${edition}"`
-          // }
-
+export function slugWithPremios() {
+  return {
+    name: `slug`,
+    type: `slug`,
+    title: 'Url',
+    options: {
+      isUnique: isUniqueAcrossAllDocuments,
+      source: async (doc) => {
+        let edition
+        if (!!doc.edition) {
+          edition = await getEdition(doc.edition._ref)
+        }
+        let slug = '/' + edition + '/' + formatSlug(doc.title.es)
+        return slug
+      },
+      slugify: (value) => parseSlug(value),
+    },
+    validation: (Rule) =>
+      Rule.custom(({ current }) => {
+        if (current) {
           if (current.endsWith('/')) {
             return `Slug cannot end with "/"`
           }
         }
-
         return true
       }),
+  }
+}
+
+export function slugWithJury() {
+  return {
+    name: `slug`,
+    type: `slug`,
+    title: 'Url',
+    description: 'Dejar vacío para conjunto de juradx sin página propia',
+    options: {
+      isUnique: isUniqueAcrossAllDocuments,
+      source: async (doc) => {
+        let edition
+        if (!!doc.edition) {
+          edition = await getEdition(doc.edition._ref)
+        }
+        let slug
+        doc.title !== undefined
+          ? (slug = '/' + edition + '/' + formatSlug(doc.title.es))
+          : (slug = '/' + edition + '/' + 'jury')
+        return slug
+      },
+      slugify: (value) => parseSlug(value),
+    },
   }
 }

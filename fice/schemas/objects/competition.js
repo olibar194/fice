@@ -26,6 +26,17 @@ export default {
         },
       ],
     },
+    {
+      name: 'jury',
+      title: 'Jurado',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: { type: 'jury' },
+        },
+      ],
+    },
   ],
   preview: {
     select: {

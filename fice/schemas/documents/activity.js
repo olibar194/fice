@@ -32,16 +32,6 @@ export const activity = {
       type: 'localeBlock',
     },
     {
-      name: 'releaseDate',
-      title: 'Release date',
-      type: 'datetime',
-    },
-    {
-      name: 'externalId',
-      title: 'External ID',
-      type: 'number',
-    },
-    {
       name: 'poster',
       title: 'Poster Image',
       type: 'image',

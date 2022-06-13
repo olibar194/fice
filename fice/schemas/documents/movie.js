@@ -162,31 +162,20 @@ export const movie = {
       of: [{ type: 'string' }],
     },
   ],
+  preview: {
+    select: {
+      title: 'original',
+      date: 'slug.current',
+      media: 'poster',
+    },
+    prepare(selection) {
+      const year = selection.date && selection.date.split('/')[1]
 
-  // preview: {
-  //   select: {
-  //     title: 'original',
-  //     date: 'slug.current',
-  //     media: 'poster',
-  //     castName0: 'castMembers.0.person.name',
-  //     castName1: 'castMembers.1.person.name',
-  //   },
-  //   prepare(selection) {
-  //     const year = selection.date && selection.date.split('/')[1]
-  //     const cast = [
-  //       selection.director,
-  //       selection.castName0,
-  //       selection.castName1,
-  //     ]
-  //       .filter(Boolean)
-  //       .join(', ')
-
-  //     return {
-  //       title: `${selection.title} ${year ? `(${year})` : ''}`,
-  //       date: selection.date,
-  //       subtitle: cast,
-  //       media: selection.media,
-  //     }
-  //   },
-  // },
+      return {
+        title: `${selection.title} - ${year}`,
+        date: selection.date,
+        media: selection.media,
+      }
+    },
+  },
 }

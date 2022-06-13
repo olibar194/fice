@@ -35,12 +35,14 @@ import island from './documents/island'
 import competition from './objects/competition'
 
 import producer from './documents/producer'
-
+import index from './documents/index'
 import hashtag from './documents/hashtag'
+import itinerary from './objects/itinerary'
 
 export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
+    index,
     competition,
     island,
     hashtag,
@@ -59,5 +61,6 @@ export default createSchema({
     edition,
     country,
     gallery,
+    itinerary,
   ]),
 })

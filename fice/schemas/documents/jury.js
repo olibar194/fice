@@ -1,7 +1,7 @@
 import { UserIcon } from '@sanity/icons'
 import { array } from 'prop-types'
 import { BiUserVoice } from 'react-icons/bi'
-import { slugWithType } from '../slugWithType'
+import { slugWithJury } from '../slugWithType'
 
 export default {
   name: 'jury',
@@ -16,8 +16,14 @@ export default {
       to: { type: 'edition' },
       validation: (Rule) => Rule.required(),
     },
-
-    slugWithType(`jury`, ``),
+    {
+      name: 'title',
+      title: 'Titulo',
+      description:
+        'El jurado general de la edición debe poseer URL y no es necesario titulo, para jurado específico de una competencia no necesita URL pero sí título',
+      type: 'localeString',
+    },
+    slugWithJury(`jury`, ``),
     {
       name: 'jury',
       title: 'Jurado',
@@ -40,7 +46,7 @@ export default {
   ],
   preview: {
     select: {
-      title: 'edition.slug.current',
+      title: 'title.es',
       date: 'edition.slug.current',
       castName0: 'jury.0.person.name',
       castName1: 'jury.1.person.name',
@@ -49,9 +55,9 @@ export default {
       const cast = [selection.castName0, selection.castName1]
         .filter(Boolean)
         .join(', ')
-
+      const title = !!selection.title ? selection.title : 'Juradx'
       return {
-        title: `Juradx - ${selection.date}`,
+        title: `${title} - ${selection.date}`,
         subtitle: cast,
       }
     },

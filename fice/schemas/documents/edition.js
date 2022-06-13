@@ -18,7 +18,7 @@ export default {
       name: 'slug',
       title: 'URL',
       type: 'slug',
-      description: "Dejar '/' en la edición del home",
+      // description: "Dejar '/' en la edición del home",
       options: {
         source: 'year',
       },
@@ -61,70 +61,18 @@ export default {
       title: 'Info home',
       type: 'richText',
     },
-
+    {
+      name: 'cronograma',
+      title: 'Cronograma',
+      type: 'file',
+      description: 'PDF del cronograma',
+    },
     // {
-    //   name: 'activities',
-    //   title: 'Actividades',
-    //   type: 'reference',
-    //   to: { type: 'activities' },
-    //   validation: (Rule) =>
-    //     Rule.custom(async (document, parent) => {
-    //       let bool
-    //       !!document
-    //         ? (bool = await sameEdiciton(document, parent))
-    //         : (bool = true)
-    //       if (bool) return bool
-    //       else {
-    //         return 'No es del mismo año'
-    //       }
-    //     }),
-    // },
-    // {
-    //   name: 'jury',
-    //   title: 'Juradx',
-    //   type: 'reference',
-    //   to: { type: 'jury' },
-    //   validation: (Rule) =>
-    //     Rule.custom(async (document, parent) => {
-    //       let bool
-    //       !!document
-    //         ? (bool = await sameEdiciton(document, parent))
-    //         : (bool = true)
-    //       if (bool) return bool
-    //       else {
-    //         return 'No es del mismo año'
-    //       }
-    //     }),
-    // },
-    // {
-    //   name: 'awards',
-    //   title: 'Premios',
-    //   type: 'reference',
-    //   to: { type: 'awards' },
-    // },
-    // {
-    //   name: 'movies',
-    //   title: 'Movies',
+    //   name: 'files',
+    //   title: 'Archivos de la edición',
     //   type: 'array',
-    //   of: [
-    //     {
-    //       type: 'reference',
-    //       to: { type: 'movie' },
-    //       validation: (Rule) => [
-    //         Rule.custom(async (document, parent) => {
-    //           let bool = await sameEdiciton(document, parent)
-    //           if (bool) return bool
-    //           else {
-    //             return 'No es del mismo año'
-    //           }
-    //         }),
-    //       ],
-    //     },
-    //   ],
-    //   validation: (Rule) => [
-    //     Rule.required().min(1).error('Required field with at least 1 entrie.'),
-    //     Rule.unique(),
-    //   ],
+    //   of: [{ type: 'file' }],
+    //   description: 'PDFs o archivos a descargar',
     // },
   ],
   preview: {

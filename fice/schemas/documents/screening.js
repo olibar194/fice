@@ -22,79 +22,88 @@ export default {
       },
       validation: (Rule) => Rule.required(),
     },
-
+    {
+      name: 'poster',
+      title: 'Poster Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: 'movie',
       title: 'Movie',
       type: 'reference',
       to: [{ type: 'movie' }],
-      description: 'Which movie or activity are we screening',
-      hidden: ({ document }) => document?.activity,
+      description: 'Which movie or/and activity are we screening',
+      // hidden: ({ document }) => document?.activity,
     },
     {
       name: 'activity',
       title: 'Actividad',
       type: 'reference',
       to: [{ type: 'activity' }],
-      description: 'Which movie or activity are we screening',
-      hidden: ({ document }) => document?.movie,
+      description: 'Which movie or/and activity are we screening',
+      // hidden: ({ document }) => document?.movie,
+    },
+    // {
+    //   name: 'published',
+    //   title: 'Published',
+    //   type: 'boolean',
+    //   description:
+    //     'Set to published when this screening should be visible on a front-end',
+    // },
+
+    // {
+    //   name: 'allowedGuests',
+    //   title: 'Who can come?',
+    //   type: 'string',
+    //   options: {
+    //     list: [
+    //       { title: 'Members', value: 'members' },
+    //       { title: 'Members and friends', value: 'friends' },
+    //       { title: 'Anyone', value: 'anyone' },
+    //     ],
+    //     layout: 'radio',
+    //   },
+    // },
+    {
+      name: 'castMembers',
+      title: 'Coordinan',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'person' } }],
     },
     {
-      name: 'published',
-      title: 'Published',
-      type: 'boolean',
-      description:
-        'Set to published when this screening should be visible on a front-end',
+      name: 'crewMembers',
+      title: 'Participan',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'person' } }],
     },
     {
-      name: 'location',
-      title: 'Location',
-      type: 'geopoint',
-      description: 'Where will the screening take place?',
+      name: 'producers',
+      title: 'Producers',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'producer' } }],
     },
     {
-      name: 'beginAt',
-      title: 'Starts at',
-      type: 'datetime',
-      description: 'When does the screening start?',
+      name: 'links',
+      title: 'Links externos',
+      type: 'array',
+      of: [{ type: 'url' }],
     },
-    {
-      name: 'endAt',
-      title: 'Ends at',
-      type: 'datetime',
-      description: 'When does the screening end?',
-    },
-    {
-      name: 'allowedGuests',
-      title: 'Who can come?',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Members', value: 'members' },
-          { title: 'Members and friends', value: 'friends' },
-          { title: 'Anyone', value: 'anyone' },
-        ],
-        layout: 'radio',
-      },
-    },
-    {
-      name: 'infoUrl',
-      title: 'More info at',
-      type: 'url',
-      description:
-        'URL to imdb.com, rottentomatoes.com or some other place with reviews, stats, etc',
-    },
+    { name: 'itinerary', title: 'Itinerario', type: 'itinerary' },
     {
       name: 'ticket',
       title: 'Ticket',
       type: 'file',
-      description: 'PDF for printing a physical ticket',
+      description: 'PDF for printing a physical ticket/archivo del evento',
     },
   ],
   preview: {
     select: {
       title: 'title.es',
-      media: 'icon',
+      media: 'poster',
     },
 
     // prepare(selection) {
