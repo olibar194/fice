@@ -29,8 +29,9 @@ export default function Header() {
 
         <div className=" flex items-center md:mt-4">
           <span className="mt-4 inline-flex justify-center space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
-            <div
-              onClick={() => handleRedirect(0)}
+            <a
+              target={'_blank'}
+              href={links[0]}
               className="text-black hover:text-white"
             >
               <span className="sr-only">Facebook</span>
@@ -46,10 +47,11 @@ export default function Header() {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </div>
+            </a>
 
-            <div
-              onClick={() => handleRedirect(1)}
+            <a
+              target={'_blank'}
+              href={links[1]}
               className="text-black hover:text-white"
             >
               <span className="sr-only">Instagram</span>
@@ -65,10 +67,11 @@ export default function Header() {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </div>
+            </a>
 
-            <div
-              onClick={() => handleRedirect(2)}
+            <a
+              target={'_blank'}
+              href={links[2]}
               className="text-black hover:text-white"
             >
               <span className="sr-only">Spotify</span>
@@ -84,9 +87,10 @@ export default function Header() {
                   fill="#191414"
                 />
               </svg>
-            </div>
-            <div
-              onClick={() => handleRedirect(3)}
+            </a>
+            <a
+              target={'_blank'}
+              href={links[3]}
               className="text-black hover:text-white "
             >
               <span className="sr-only ">Twitter</span>
@@ -98,7 +102,7 @@ export default function Header() {
               >
                 <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
               </svg>
-            </div>
+            </a>
           </span>
           {/* <div className='flex justify-center items-center lg:p-2 lg:mx-4'>
               <button

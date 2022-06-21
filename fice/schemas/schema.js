@@ -38,6 +38,7 @@ import producer from './documents/producer'
 import index from './documents/index'
 import hashtag from './documents/hashtag'
 import itinerary from './objects/itinerary'
+import _break from './objects/break'
 
 export default createSchema({
   name: 'default',
@@ -62,5 +63,6 @@ export default createSchema({
     country,
     gallery,
     itinerary,
+    _break,
   ]),
 })

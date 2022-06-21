@@ -32,10 +32,10 @@ export default function Page({ data, preview }: any) {
   console.log(data, docType)
 
   return (
-    <>
-      {docType === 'home' && <Home page={pageData} />}
-      {docType === 'page' && <PageSingle page={pageData} />}
-    </>
+    <section className="flex flex-col items-center">
+      {docType === 'home' && <Home page={data} />}
+      {/* {docType === 'page' && <PageSingle page={pageData} />} */}
+    </section>
   )
 }
 
@@ -45,11 +45,25 @@ function getQueryFromSlug(slugArray = []) {
   }
 
   const docQuery: q = {
-    home: groq`*[_type == "home"][0]`,
-    news: groq`*[_type == "article" && slug.current == $slug][0]`,
+    home: groq`*[_type == "edition" && slug.current == '/'][0]{
+    ...,
+    image {
+      ...,
+      _type == "image" => {..., asset -> {...}}
+      },
+    logo {
+      ...,
+      _type == "image" => {..., asset -> {...}}
+      }
+    }`,
+    edition: groq`*[_type == "edition" && slug.current == $slug][0]`,
     page: groq`*[_type == "page" && slug.current == $slug][0]`,
   }
   console.log('slug', slugArray)
+
+  let queryParams = { slug: `/${slugArray.join('/')}` }
+
+  let docType = 'edition'
 
   if (slugArray.length === 0) {
     return {
@@ -57,20 +71,6 @@ function getQueryFromSlug(slugArray = []) {
       queryParams: { slug: '/' },
       query: docQuery.home,
     }
-  }
-
-  const [slugStart] = slugArray
-  console.log(slugStart, 'slugstart')
-
-  // We now have to re-combine the slug array to match our slug in Sanity.
-  let queryParams = { slug: `/${slugArray.join('/')}` }
-
-  let docType
-  // Keep extending this section to match the slug against the docQuery object keys
-  if (docQuery.hasOwnProperty(slugStart)) {
-    docType = slugStart
-  } else {
-    docType = `page`
   }
 
   return {
@@ -84,28 +84,68 @@ export async function getStaticProps({ params }: any) {
   const client = await getClient()
 
   // Every website has a bunch of global content that every page needs, too!
+  const globalSettingsQuery = groq`*[_type == "index"][0]{
+  ...,
+  acompanan{
+    ...,
+    images[] {
+      ...,
+      asset -> {...}
+      }
+  },
+  apoyan{
+    ...,
+    images[] {
+      ...,
+      asset -> {...}
+      }
+  },
+  crewMembers[] -> {
+    ...,
+    image {
+      ...,
+      asset -> {...}
+      },
+     role[] -> {
+       ...
+     }
+  },
+  infoVirtual{
+   es[] {
+     ...,
+     _type == "image" => {..., asset -> {...}}
+     },
+   },
+  info{
+   es[] {
+     ...,
+     _type == "image" => {..., asset -> {...}}
+     },
+   },
+}`
 
-  // const globalSettings = await client.fetch(globalSettingsQuery)
+  const globalSettings = await client.fetch(globalSettingsQuery)
 
   // A helper function to work out what query we should run based on this slug
 
   const { query, queryParams, docType } = getQueryFromSlug(params.slug)
 
-  const query2 = groq`*[_type == "movie" && slug.current == '/2022/movies/pi'][0]`
+  // const query2 = groq`*[_type == "movie" && slug.current == '/2022/movies/pi'][0]`
   // Get the initial data for this page, using the correct query
-  const pageData = await client.fetch(query2)
+  const pageData = await client.fetch(query, queryParams)
   // const pageData = await client.fetch(query, queryParams)
 
   return {
     props: {
-      data: { query, queryParams, docType, pageData },
+      data: { query, queryParams, docType, pageData, globalSettings },
     },
   }
 }
 
 export async function getStaticPaths() {
   const paths = await getClient().fetch(
-    groq`*[_type in ["edition", "movies", "person", 'jury', 'activity', 'activities', 'awards', 'screening' ] && defined(slug.current)][].slug.current`
+    //   groq`*[_type in ["edition", "movies", "person", 'jury', 'activity', 'activities', 'awards', 'screening' ] && defined(slug.current)][].slug.current`
+    groq`*[_type in ["edition"] && defined(slug.current)][].slug.current`
   )
 
   // Split the slug strings to arrays (as required by Next.js)

@@ -5,12 +5,6 @@ export default {
   type: 'document',
   icon: BiHomeAlt,
   fields: [
-    {
-      name: 'slug',
-      title: 'URL',
-      type: 'slug',
-      description: "Dejar '/' home",
-    },
     { name: 'info', title: 'Info Fice', type: 'localeBlock' },
     {
       name: 'convo',
@@ -50,6 +44,11 @@ export default {
           description: 'PDFs o archivos relativos a la convocatoria',
         },
       ],
+    },
+    {
+      name: 'infoVirtual',
+      title: 'Info Virtual',
+      type: 'localeBlock',
     },
     {
       name: 'crewMembers',

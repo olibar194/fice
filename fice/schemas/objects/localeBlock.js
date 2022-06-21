@@ -19,6 +19,12 @@ export const localeBlock = {
       {
         type: 'block',
       },
+      {
+        type: 'break',
+      },
+      {
+        type: 'image',
+      },
     ],
 
     fieldset: lang.isDefault ? null : 'translations',

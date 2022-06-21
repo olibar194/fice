@@ -1,5 +1,4 @@
 import { BiSpreadsheet as icon } from 'react-icons/bi'
-import { slugWithType } from '../slugWithType'
 
 export default {
   name: 'dataSheet',
@@ -59,7 +58,7 @@ export default {
     {
       name: 'director',
       title: 'Director',
-      type: 'array', //   of: [{ type: 'reference', to: { type: 'person' } }],
+      type: 'array',
       of: [{ type: 'reference', to: { type: 'person' } }],
       validation: (Rule) => Rule.required(),
     },
@@ -96,18 +95,10 @@ export default {
       date: 'slug.current',
       media: 'poster',
       director: 'director[0].name',
-      // castName0: 'castMembers.0.person.name',
-      // castName1: 'castMembers.1.person.name',
     },
     prepare(selection) {
       const year = selection.date && selection.date.split('/')[1]
-      const cast = [
-        selection.director,
-        // selection.castName0,
-        // selection.castName1,
-      ]
-        .filter(Boolean)
-        .join(', ')
+      const cast = [selection.director].filter(Boolean).join(', ')
 
       return {
         title: `${selection.title} ${year ? `(${year})` : ''}`,
