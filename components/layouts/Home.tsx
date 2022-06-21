@@ -185,6 +185,16 @@ export default function Home({ page }: any) {
             })}
           </div>
 
+          {/* info virtual */}
+
+          <h1 className="p-8 text-center text-lg font-bold uppercase tracking-wide text-gray-800 sm:text-xl">
+            Info Virtual
+          </h1>
+          <PortableText
+            value={global.infoVirtual.es}
+            components={myPortableTextComponents}
+          />
+
           {/* apoyan y acompañan */}
           <section className=" m-8 mx-2 pt-8 pb-2">
             <div className="body-font container mx-auto my-4 px-8  sm:px-12  lg:rounded-xl lg:px-20">
@@ -194,7 +204,7 @@ export default function Home({ page }: any) {
               <div className="flex flex-wrap items-center justify-center px-8">
                 {global.apoyan.images.map((e: any, i: any) => {
                   return (
-                    <div className="flex items-center justify-center ">
+                    <div key={i} className="flex items-center justify-center ">
                       <img
                         src={e.asset.url}
                         alt=""
@@ -213,7 +223,10 @@ export default function Home({ page }: any) {
               <div className="flex flex-wrap  items-center justify-center ">
                 {global.acompanan.images.map((e: any, i: any) => {
                   return (
-                    <div className="col-span-6 flex items-center justify-center sm:col-span-4 md:col-span-3 xl:col-span-2">
+                    <div
+                      key={i}
+                      className="col-span-6 flex items-center justify-center sm:col-span-4 md:col-span-3 xl:col-span-2"
+                    >
                       <img
                         src={e.asset.url}
                         alt=""
