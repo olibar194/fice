@@ -47,17 +47,67 @@ function getQueryFromSlug(slugArray = []) {
   const docQuery: q = {
     home: groq`*[_type == "edition" && slug.current == '/'][0]{
     ...,
-    image {
+    gallery {
       ...,
-      _type == "image" => {..., asset -> {...}}
+      images[] {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+      }
+    },
+    convo{
+      ...,
+      call -> { ...,
+        categoryCall[] {
+          ...,
+          image {..., asset -> {...}},
+          info {
+            ...,
+            es[] { 
+            ...,
+            _type == "image" => {..., asset -> {...}}
+            },
+          },
+        },
+        image{..., asset -> {...},},
+        files[] {
+          ...,
+          _type == "file" => {..., asset -> {...}}
+          
+        },
+        info{
+          es[] {
+            ...,
+            _type == "image" => {..., asset -> {...}}
+            },
+          },
       },
+    },
     logo {
       ...,
       _type == "image" => {..., asset -> {...}}
-      }
+      },
+    info{
+      es[] {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+        },
+    },
+    infoVirtual{
+      es[] {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+        },
+    },
+    cronograma {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+        
+    },
     }`,
     edition: groq`*[_type == "edition" && slug.current == $slug][0]`,
+    about: groq`*[_type == "about" && slug.current == $slug][0]`,
     page: groq`*[_type == "page" && slug.current == $slug][0]`,
+    call: groq`*[_type == "call" && slug.current == $slug][0]`,
   }
   console.log('slug', slugArray)
 
@@ -72,7 +122,24 @@ function getQueryFromSlug(slugArray = []) {
       query: docQuery.home,
     }
   }
+  if (slugArray[1] === 'convocatoria') {
+    // console.log('convo', slugArray)
 
+    return {
+      docType: 'call',
+      queryParams: queryParams,
+      query: docQuery.call,
+    }
+  }
+
+  if (slugArray[0] === 'about') {
+    console.log('about', slugArray)
+    return {
+      docType: 'about',
+      queryParams: { slug: '/about' },
+      query: docQuery.about,
+    }
+  }
   return {
     docType,
     queryParams,
@@ -86,6 +153,10 @@ export async function getStaticProps({ params }: any) {
   // Every website has a bunch of global content that every page needs, too!
   const globalSettingsQuery = groq`*[_type == "index"][0]{
   ...,
+  image {
+    ...,
+    asset -> {...}
+  },
   acompanan{
     ...,
     images[] {
@@ -110,12 +181,6 @@ export async function getStaticProps({ params }: any) {
        ...
      }
   },
-  infoVirtual{
-   es[] {
-     ...,
-     _type == "image" => {..., asset -> {...}}
-     },
-   },
   info{
    es[] {
      ...,
@@ -128,9 +193,19 @@ export async function getStaticProps({ params }: any) {
 
   // A helper function to work out what query we should run based on this slug
 
-  const { query, queryParams, docType } = getQueryFromSlug(params.slug)
+  if (params.slug !== undefined && params.slug[0] === 'about') {
+    let docType = 'about'
+    let pageData = null
+    let query = null
+    let queryParams = null
+    return {
+      props: {
+        data: { query, queryParams, docType, pageData, globalSettings },
+      },
+    }
+  }
 
-  // const query2 = groq`*[_type == "movie" && slug.current == '/2022/movies/pi'][0]`
+  const { query, queryParams, docType } = getQueryFromSlug(params.slug)
   // Get the initial data for this page, using the correct query
   const pageData = await client.fetch(query, queryParams)
   // const pageData = await client.fetch(query, queryParams)
@@ -145,7 +220,7 @@ export async function getStaticProps({ params }: any) {
 export async function getStaticPaths() {
   const paths = await getClient().fetch(
     //   groq`*[_type in ["edition", "movies", "person", 'jury', 'activity', 'activities', 'awards', 'screening' ] && defined(slug.current)][].slug.current`
-    groq`*[_type in ["edition"] && defined(slug.current)][].slug.current`
+    groq`*[_type in ["edition", "about", "call"] && defined(slug.current)][].slug.current`
   )
 
   // Split the slug strings to arrays (as required by Next.js)

@@ -21,13 +21,25 @@ export default {
       },
       validation: (Rule) => Rule.required(),
     },
+    { name: 'gallery', title: 'Carousel Home', type: 'gallery' },
     {
-      name: 'image',
-      title: 'Portada',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      name: 'convo',
+      title: 'Convocatoria',
+      type: 'document',
+      fields: [
+        {
+          name: 'enabled',
+          type: 'boolean',
+          title: 'Convocatoria habilitada',
+          description: 'La convocatoria sigue abierta?',
+        },
+        {
+          name: 'call',
+          title: 'Referencia Convocatoria',
+          type: 'reference',
+          to: { type: 'call' },
+        },
+      ],
     },
     {
       name: 'logo',
@@ -55,7 +67,7 @@ export default {
     },
     {
       name: 'info',
-      title: 'Info home',
+      title: 'Info Edición',
       type: 'localeBlock',
     },
     {

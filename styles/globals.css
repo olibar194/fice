@@ -15,7 +15,8 @@
 }
 
 html {
-  background-color: rgb(245, 255, 251);
+  background-color: #222d29;
+  overflow-x: hidden;
 }
 .hero {
   position: relative;
@@ -56,4 +57,196 @@ header {
 @font-face {
   font-family: 'kiona';
   src: local('kiona'), url('./../public/fonts/Kiona.ttf') format('truetype');
+}
+
+.embla {
+  position: relative;
+  background-color: #000000;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__viewport.is-draggable {
+  cursor: move;
+  cursor: grab;
+}
+
+.embla__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.embla__container {
+  display: flex;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: -10px;
+}
+
+.embla__slide {
+  position: relative;
+  min-width: 100%;
+  padding-left: 10px;
+}
+
+.embla__slide__inner {
+  position: relative;
+  overflow: hidden;
+  height: 190px;
+}
+
+.embla__slide__img {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  min-width: 100%;
+  max-width: none;
+  transform: translate(-50%, -50%);
+}
+
+.embla__button {
+  outline: 0;
+  cursor: pointer;
+  background-color: transparent;
+  touch-action: manipulation;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  fill: #ffffff;
+  padding: 0;
+}
+
+.embla__button:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.embla__button__svg {
+  width: 100%;
+  height: 100%;
+}
+
+.embla__button--prev {
+  left: 27px;
+}
+
+.embla__button--next {
+  right: 27px;
+}
+
+@media (max-width: 620px) {
+  .embla__button--prev {
+    left: 2px;
+  }
+
+  .embla__button--next {
+    right: 2px;
+  }
+}
+
+.embla__button2 {
+  outline: 0;
+  cursor: pointer;
+  background-color: transparent;
+  touch-action: manipulation;
+  position: relative;
+  z-index: 1;
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
+  border: 0;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  fill: #ffffff;
+  padding: 0;
+}
+
+.embla__button--prev2 {
+  left: 7px;
+}
+
+.embla__button--next2 {
+  right: 7px;
+}
+
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.embla__dot {
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  width: 30px;
+  height: 30px;
+  margin-right: 2px;
+  margin-left: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.embla__dot:after {
+  background-color: transparent;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  content: '';
+  border-color: #ffffff;
+  border: #ffffff;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.embla__dot.is-selected:after {
+  background-color: #ffffff;
+  opacity: 1;
+}
+
+@keyframes bounce2 {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: translateY(-5%);
+    animation-timing-function: ease-in;
+  }
+}
+:hover.animate-bounce2 {
+  animation: bounce2 1s infinite;
+}
+
+body::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #65bf83;
+  outline: 0px solid slategrey;
 }

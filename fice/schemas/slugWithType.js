@@ -17,6 +17,7 @@ function formatSlug(input) {
 function parseSlug(input) {
   return input
 }
+
 export function slugWithType(prefix = ``, source = '', lang = '') {
   const slugStart = prefix ? `/${prefix}/` : `/`
   const slugEnd = source === '' ? `/${prefix}` : `/`

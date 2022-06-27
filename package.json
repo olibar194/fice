@@ -11,7 +11,7 @@
     "aos": "^2.3.4",
     "embla-carousel-autoplay": "^6.2.0",
     "embla-carousel-react": "^6.2.0",
-    "framer-motion": "^6.3.3",
+    "framer-motion": "^6.3.13",
     "hamburger-react": "^2.4.1",
     "next": "latest",
     "next-sanity": "^0.5.2",

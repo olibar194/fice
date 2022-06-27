@@ -1,3 +1,4 @@
+import { type } from 'os'
 import { BiHomeAlt } from 'react-icons/bi'
 export default {
   name: 'index',
@@ -5,51 +6,22 @@ export default {
   type: 'document',
   icon: BiHomeAlt,
   fields: [
+    {
+      name: 'slug',
+      title: 'URL',
+      type: 'slug',
+      // description: "Dejar '/' para el home",
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'image',
+      title: 'Portada',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
     { name: 'info', title: 'Info Fice', type: 'localeBlock' },
-    {
-      name: 'convo',
-      title: 'Convocatoria',
-      type: 'document',
-      fields: [
-        {
-          name: 'enabled',
-          type: 'boolean',
-          title: 'Convocatoria habilitada',
-          description: 'La convocatoria sigue abierta?',
-        },
-        {
-          name: 'links',
-          title: 'Links Convocatoria',
-          type: 'array',
-          of: [
-            {
-              type: 'object',
-              fields: [
-                { name: 'url', type: 'url' },
-                { name: 'buttons', type: 'localeString' },
-              ],
-              preview: {
-                select: { title: 'buttons.es', subtitle: 'url' },
-              },
-            },
-          ],
-        },
-
-        { name: 'info', title: 'Info Convocatoria', type: 'localeBlock' },
-        {
-          name: 'files',
-          title: 'Archivos de la convocatoria',
-          type: 'array',
-          of: [{ type: 'file' }],
-          description: 'PDFs o archivos relativos a la convocatoria',
-        },
-      ],
-    },
-    {
-      name: 'infoVirtual',
-      title: 'Info Virtual',
-      type: 'localeBlock',
-    },
     {
       name: 'crewMembers',
       title: 'Miembros',

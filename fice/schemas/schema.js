@@ -16,6 +16,7 @@ import person from './documents/person'
 import role from './documents/role'
 import screening from './documents/screening'
 import jury from './documents/jury'
+import call from './documents/convocatoria'
 
 // import plotSummary from './documents/plotSummary'
 // import plotSummaries from './documents/plotSummaries'
@@ -43,6 +44,7 @@ import _break from './objects/break'
 export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
+    call,
     index,
     competition,
     island,
