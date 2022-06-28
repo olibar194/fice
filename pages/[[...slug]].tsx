@@ -7,6 +7,7 @@ import { usePreviewSubscription, urlFor } from '../lib/sanity'
 import { getClient } from '../lib/sanity.server'
 import dynamic from 'next/dynamic'
 import Footer from './../components/footer'
+import About from '../components/layouts/About'
 const movieQuery = groq`
   *[_type == "movie" && slug.current == $slug][0] {
     _id,
@@ -35,6 +36,8 @@ export default function Page({ data, preview }: any) {
     <>
       <section className="flex flex-col items-center">
         {docType === 'home' && <Home page={data} />}
+        {docType === 'about' && <About page={data} />}
+
         {/* {docType === 'page' && <PageSingle page={pageData} />} */}
       </section>
       <Footer />
@@ -156,6 +159,14 @@ export async function getStaticProps({ params }: any) {
   // Every website has a bunch of global content that every page needs, too!
   const globalSettingsQuery = groq`*[_type == "index"][0]{
   ...,
+  video {
+    ...,
+    asset -> {...}
+  },
+  logo {
+    ...,
+    asset -> {...}
+  },
   image {
     ...,
     asset -> {...}
@@ -197,8 +208,70 @@ export async function getStaticProps({ params }: any) {
   // A helper function to work out what query we should run based on this slug
 
   if (params.slug !== undefined && params.slug[0] === 'about') {
+    const queryEdicion = groq`*[_type == "edition" && slug.current == '/'][0]{
+    ...,
+    gallery {
+      ...,
+      images[] {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+      }
+    },
+    convo{
+      ...,
+      call -> { ...,
+        categoryCall[] {
+          ...,
+          image {..., asset -> {...}},
+          info {
+            ...,
+            es[] { 
+            ...,
+            _type == "image" => {..., asset -> {...}}
+            },
+          },
+        },
+        image{..., asset -> {...},},
+        files[] {
+          ...,
+          _type == "file" => {..., asset -> {...}}
+          
+        },
+        info{
+          es[] {
+            ...,
+            _type == "image" => {..., asset -> {...}}
+            },
+          },
+      },
+    },
+    logo {
+      ...,
+      _type == "image" => {..., asset -> {...}}
+      },
+    info{
+      es[] {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+        },
+    },
+    infoVirtual{
+      es[] {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+        },
+    },
+    cronograma {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+        
+    }
+    }`
+
+    const datosEdicion = await client.fetch(queryEdicion)
+
     let docType = 'about'
-    let pageData = null
+    let pageData = datosEdicion
     let query = null
     let queryParams = null
     return {

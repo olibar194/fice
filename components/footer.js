@@ -21,17 +21,17 @@ export default function Footer() {
           </div>
           <div
             id="innerSearch"
-            class="m-2 w-full items-center justify-between rounded-xl border-2 border-gray-200 bg-transparent pl-4 text-5xl dark:border-gray-800 sm:flex"
+            className="m-2 w-full items-center justify-between rounded-xl border-2 border-gray-200 bg-transparent pl-4 text-5xl dark:border-gray-800 sm:flex"
           >
-            <div class="flex w-full items-center bg-transparent text-5xl text-gray-600 dark:text-gray-400">
+            <div className="flex w-full items-center bg-transparent text-5xl text-gray-600 dark:text-gray-400">
               <input
                 id="innerSearch"
-                class="w-full rounded-full py-4 pl-4 text-5xl tracking-tight placeholder-gray-600 focus:outline-none dark:bg-transparent dark:placeholder-gray-400 xl:text-base"
+                className="w-full rounded-full py-4 pl-4 text-5xl tracking-tight placeholder-gray-600 focus:outline-none dark:bg-transparent dark:placeholder-gray-400 xl:text-base"
                 placeholder="Ingresá tu email.."
               />
               {/* reemplazar */}
               <svg
-                class="h-16 w-16 fill-current text-blue-600"
+                className="h-16 w-16 fill-current text-blue-600"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 40 24"
               >
@@ -39,7 +39,7 @@ export default function Footer() {
               </svg>
               <label
                 for="innerSearch"
-                class="pointer-events-none absolute opacity-0"
+                className="pointer-events-none absolute opacity-0"
               >
                 Search
               </label>
@@ -48,31 +48,31 @@ export default function Footer() {
         </div>
         {/* <div
           onClick={() => handleRedirect(4)}
-          class="d-din container mx-auto flex max-w-7xl cursor-pointer flex-col items-center px-8 py-8 sm:flex-row"
+          className="d-din container mx-auto flex max-w-7xl cursor-pointer flex-col items-center px-8 py-8 sm:flex-row"
         >
           <h1 className="text-bold text-xl underline">
             Accedé al PDF con la programación completa!
           </h1>
         </div> */}
-        <section class="body-font mx-2 border bg-white text-gray-700 lg:rounded-xl">
-          <div class="container mx-auto flex max-w-7xl flex-col items-center px-8 py-8 sm:flex-row">
+        <section className="body-font mx-2 border bg-white text-gray-700 lg:rounded-xl">
+          <div className="container mx-auto flex max-w-7xl flex-col items-center px-8 py-8 sm:flex-row">
             <a
               href="#_"
-              class="logo select-none text-xl font-black leading-none text-gray-900"
+              className="logo select-none text-xl font-black leading-none text-gray-900"
             >
-              FICE<span class="emerald">.</span>
+              FICE<span className="emerald">.</span>
             </a>
-            <p class="mt-4 text-sm text-gray-500 sm:ml-4 sm:mt-0 sm:border-l sm:border-gray-200 sm:pl-4">
+            <p className="mt-4 text-sm text-gray-500 sm:ml-4 sm:mt-0 sm:border-l sm:border-gray-200 sm:pl-4">
               © 2021 FICE - Todos los derechos reservados
             </p>
-            <span class="mt-4 inline-flex justify-center space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
+            <span className="mt-4 inline-flex justify-center space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
               <div
                 onClick={() => handleRedirect(0)}
-                class="text-gray-400 hover:text-gray-500"
+                className="text-gray-400 hover:text-gray-500"
               >
-                <span class="sr-only">Facebook</span>
+                <span className="sr-only">Facebook</span>
                 <svg
-                  class="h-6 w-6"
+                  className="h-6 w-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -87,11 +87,11 @@ export default function Footer() {
 
               <div
                 onClick={() => handleRedirect(1)}
-                class="text-gray-400 hover:text-gray-500"
+                className="text-gray-400 hover:text-gray-500"
               >
-                <span class="sr-only">Instagram</span>
+                <span className="sr-only">Instagram</span>
                 <svg
-                  class="h-6 w-6"
+                  className="h-6 w-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -106,9 +106,9 @@ export default function Footer() {
 
               <div
                 onClick={() => handleRedirect(2)}
-                class="text-gray-400 hover:text-gray-500"
+                className="text-gray-400 hover:text-gray-500"
               >
-                <span class="sr-only">Spotify</span>
+                <span className="sr-only">Spotify</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="gris"
@@ -123,11 +123,11 @@ export default function Footer() {
               </div>
               <div
                 onClick={() => handleRedirect(3)}
-                class="text-gray-400 hover:text-gray-500 "
+                className="text-gray-400 hover:text-gray-500 "
               >
-                <span class="sr-only ">Twitter</span>
+                <span className="sr-only ">Twitter</span>
                 <svg
-                  class="twit h-6 w-6"
+                  className="twit h-6 w-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"

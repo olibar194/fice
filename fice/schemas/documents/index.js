@@ -14,6 +14,22 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: 'video',
+      title: 'Video',
+      type: 'file',
+      options: {
+        accept: 'video/mp4',
+      },
+    },
+    {
       name: 'image',
       title: 'Portada',
       type: 'image',

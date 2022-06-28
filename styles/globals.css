@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .negro {
-  fill: black;
+  /* fill: black; */
   width: 1.83rem;
   height: 1.83rem;
 }
