@@ -6,7 +6,7 @@ import { PortableText } from '@portabletext/react'
 import { usePreviewSubscription, urlFor } from '../lib/sanity'
 import { getClient } from '../lib/sanity.server'
 import dynamic from 'next/dynamic'
-
+import Footer from './../components/footer'
 const movieQuery = groq`
   *[_type == "movie" && slug.current == $slug][0] {
     _id,
@@ -32,10 +32,13 @@ export default function Page({ data, preview }: any) {
   console.log(data, docType)
 
   return (
-    <section className="flex flex-col items-center">
-      {docType === 'home' && <Home page={data} />}
-      {/* {docType === 'page' && <PageSingle page={pageData} />} */}
-    </section>
+    <>
+      <section className="flex flex-col items-center">
+        {docType === 'home' && <Home page={data} />}
+        {/* {docType === 'page' && <PageSingle page={pageData} />} */}
+      </section>
+      <Footer />
+    </>
   )
 }
 

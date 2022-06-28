@@ -89,7 +89,7 @@ export default function Home({ page }: any) {
         )}
         <section className=" m-8 mx-2 pt-8 pb-2">
           <div className="body-font container mx-auto my-4 px-8  sm:px-12  lg:rounded-xl lg:px-20">
-            <h1 className="p-8 text-center text-lg font-bold uppercase tracking-wide text-gray-800 sm:text-xl">
+            <h1 className=" text-center text-lg font-bold capitalize tracking-wide text-gray-800 sm:text-xl">
               apoyan
             </h1>
             <div className="flex flex-wrap items-center justify-center px-8">
@@ -108,7 +108,7 @@ export default function Home({ page }: any) {
           </div>
 
           <div className="body-font container mx-auto  px-8  sm:px-12 lg:rounded-xl lg:px-20">
-            <h1 className="p-8 text-center text-lg font-bold uppercase tracking-wide text-gray-800 sm:text-xl">
+            <h1 className=" text-center text-lg font-bold capitalize tracking-wide text-gray-800 sm:text-xl">
               acompañan
             </h1>
             <div className="flex flex-wrap  items-center justify-center ">

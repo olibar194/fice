@@ -15,7 +15,9 @@
 }
 
 html {
-  background-color: #222d29;
+  /* background-color: #222d29; */
+  background-color: #efefef;
+  font-family: 'din';
   overflow-x: hidden;
 }
 .hero {
@@ -249,4 +251,13 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: #65bf83;
   outline: 0px solid slategrey;
+}
+
+.gris {
+  fill: rgb(153, 159, 161);
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.gris:hover {
+  fill: rgb(87, 95, 104);
 }
