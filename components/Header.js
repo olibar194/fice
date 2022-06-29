@@ -365,7 +365,7 @@ export default function Header({ ...props }) {
           </motion.ul> */}
 
             {/* end submenu */}
-            <Link href="/2022/convocatoria">
+            <Link href="/2022/open-call">
               <motion.li
                 whileHover={{
                   x: 4,

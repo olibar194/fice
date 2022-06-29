@@ -22,7 +22,7 @@ export default {
         hotspot: true,
       },
     },
-    slugWithType('convocatoria', ''),
+    slugWithType('open-call', ''),
     { name: 'info', title: 'Info Convocatoria', type: 'localeBlock' },
     {
       name: 'categoryCall',
@@ -53,6 +53,19 @@ export default {
                 hotspot: true,
               },
             },
+            {
+              name: 'link_f',
+              title: 'Link Externo',
+              type: 'string',
+              description: 'Link que navega al formulario de inscripción',
+            },
+            {
+              name: 'files',
+              title: 'Archivos de la convocatoria',
+              type: 'array',
+              of: [{ type: 'file' }],
+              description: 'PDFs o archivos relativos a la convocatoria',
+            },
           ],
         },
       ],
@@ -74,13 +87,6 @@ export default {
     //     },
     //   ],
     // },
-    {
-      name: 'files',
-      title: 'Archivos de la convocatoria',
-      type: 'array',
-      of: [{ type: 'file' }],
-      description: 'PDFs o archivos relativos a la convocatoria',
-    },
   ],
   preview: {
     select: { date: 'slug.current', media: 'image' },

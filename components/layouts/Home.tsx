@@ -3,11 +3,12 @@ import { PortableText } from '@portabletext/react'
 // import { motion } from 'framer-motion'
 // import AOS from 'aos'
 import 'aos/dist/aos.css'
-// import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 // import useScrollBlock from './../../hooks/useScrollBlock'
 import Link from 'next/link'
 // import { url } from 'inspector'
 import EmblaCarousel from './../EmblaCarousel'
+import colorContext from '../../contexts/colorContext'
 
 export default function Home({ page }: any) {
   const { globalSettings: global, pageData: data } = page
@@ -55,12 +56,23 @@ export default function Home({ page }: any) {
       },
     },
   }
+  const { color, setColor } = useContext(colorContext)
+
+  useEffect(() => {
+    data.color_p !== undefined && setColor(data.color_p)
+  }, [page])
+
+  console.log(data.convo.enabled)
 
   return (
     <section className="flex w-full flex-col items-center justify-center">
       {/* banner */}
 
-      <EmblaCarousel titles={title} slides={images} />
+      <EmblaCarousel
+        call={data.convo.enabled ? data.convo.call : null}
+        titles={title}
+        slides={images}
+      />
 
       <section className=" max-w-6xl  p-4">
         {data.convo.enabled && (

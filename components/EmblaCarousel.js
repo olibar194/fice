@@ -5,6 +5,7 @@ import React, {
   useRef,
   useContext,
 } from 'react'
+import Link from 'next/link'
 import { PrevButton, NextButton, DotButton } from './EmblaCarouselButtons'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
@@ -12,8 +13,10 @@ import Image from 'next/image'
 import ThemeContext from '../contexts/blurContext'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import colorContext from '../contexts/colorContext'
 
 export default function EmblaCarousel({
+  call,
   titles,
   slides,
   options = { loop: true, skipSnaps: false },
@@ -24,6 +27,8 @@ export default function EmblaCarousel({
     'https://open.spotify.com/show/6KpOwOE14nbsG5SvwHrCnj',
     'https://twitter.com/fice_cine',
   ]
+
+  const { color, setColor } = useContext(colorContext)
 
   useEffect(() => {
     AOS.init({
@@ -78,12 +83,31 @@ export default function EmblaCarousel({
 
     emblaApi.on('select', onSelect)
   }, [emblaApi, setScrollSnaps, onSelect])
-
+  console.log(call)
   return (
     <>
       <div className="embla relative min-h-screen w-full">
+        {call !== null ? (
+          <section className="absolute right-4 bottom-16 z-20 mx-4 flex flex-col">
+            <h1
+              className="m-2 text-6xl uppercase"
+              style={{ color: `${color}` }}
+            >
+              Open call - 2022
+            </h1>
+            <Link href={call.slug.current}>
+              <button className="m-4 rounded-sm border border-teal-600 bg-teal-100 p-2">
+                Convocatorias
+              </button>
+            </Link>
+          </section>
+        ) : (
+          <section className="absolute bottom-16 z-20 mx-4">
+            <h1 className="text-6xl">Edición - 2021</h1>
+          </section>
+        )}
         <div className="embla__viewport" ref={emblaRef}>
-          <div className="embla__container">
+          <div className="embla__container relative">
             {slides.map((element, index) => (
               <div className="embla__slide" key={index}>
                 <div

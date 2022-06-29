@@ -35,7 +35,7 @@ export const DotButton = ({ selected, onClick }) => (
     type="button"
     onClick={onClick}
     className={`m-1 h-4  w-4 rounded-full ${
-      selected ? 'bg-black' : ' border-2 border-black'
+      selected ? 'border-2 border-black bg-black' : ' border-2 border-black'
     } p-2`}
   ></button>
 )

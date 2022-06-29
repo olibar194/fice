@@ -8,6 +8,7 @@ import { getClient } from '../lib/sanity.server'
 import dynamic from 'next/dynamic'
 import Footer from './../components/footer'
 import About from '../components/layouts/About'
+import Call from '../components/layouts/Call'
 const movieQuery = groq`
   *[_type == "movie" && slug.current == $slug][0] {
     _id,
@@ -37,6 +38,7 @@ export default function Page({ data, preview }: any) {
       <section className="flex flex-col items-center">
         {docType === 'home' && <Home page={data} />}
         {docType === 'about' && <About page={data} />}
+        {docType === 'call' && <Call page={data} />}
 
         {/* {docType === 'page' && <PageSingle page={pageData} />} */}
       </section>
@@ -113,7 +115,36 @@ function getQueryFromSlug(slugArray = []) {
     edition: groq`*[_type == "edition" && slug.current == $slug][0]`,
     about: groq`*[_type == "about" && slug.current == $slug][0]`,
     page: groq`*[_type == "page" && slug.current == $slug][0]`,
-    call: groq`*[_type == "call" && slug.current == $slug][0]`,
+    call: groq`*[_type == "call" && slug.current == '/2022/open-call'][0]{
+    ...,
+    edition -> {
+      year
+    },
+    categoryCall[] {
+        ...,
+        link_f {...},
+        image {..., asset -> {...}},
+        info {
+          ...,
+          es[] {
+            ...,
+            _type == "image" => {..., asset -> {...}}
+          }
+        },
+        files[] {
+          ...,
+          _type == "file" => {..., asset -> {...}}
+        },
+      },
+    info{
+      es[] {
+        ...,
+        _type == "image" => {..., asset -> {...}}
+        },
+    },
+    image{..., asset -> {...},},
+
+    }`,
   }
   console.log('slug', slugArray)
 
@@ -128,7 +159,7 @@ function getQueryFromSlug(slugArray = []) {
       query: docQuery.home,
     }
   }
-  if (slugArray[1] === 'convocatoria') {
+  if (slugArray[1] === 'open-call') {
     // console.log('convo', slugArray)
 
     return {
