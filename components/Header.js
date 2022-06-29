@@ -145,7 +145,7 @@ export default function Header({ ...props }) {
         <div className="m-1 w-32 cursor-pointer p-1	sm:w-60">
           <div className=" flex cursor-pointer items-center text-center text-gray-700">
             <h1 className="flex w-full justify-center">
-              <a href={'/'} aria-label="Rujan logo">
+              <a href={'/'} aria-label="Fice logo">
                 {' '}
                 <img
                   // style={{ width: ' 250px' }}
@@ -156,7 +156,7 @@ export default function Header({ ...props }) {
                       : '/images/fice2.png'
                   }
                   // src={'/images/fice2.png'}
-                  alt="Rujan"
+                  alt="Fice"
                   className="w-full transform transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
                 />
               </a>

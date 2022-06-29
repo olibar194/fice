@@ -87,7 +87,7 @@ export default function Home({ page }: any) {
                   <div key={index} className=" p-2">
                     <button className="cursor-pointer  rounded border-2 border-emerald-700 bg-emerald-200 p-4">
                       <Link
-                        href={`/2022/convocatoria/${value.link}`}
+                        href={`/2022/open-call${value.link}`}
                         target={'_blank'}
                       >
                         {value.title.es}
