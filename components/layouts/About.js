@@ -157,8 +157,8 @@ export default function About({ page }) {
               height: '100vh',
               width: '100%',
               objectFit: 'cover',
-              paddingTop: '20px',
-              paddingBottom: '20px',
+              // paddingTop: '20px',
+              // paddingBottom: '20px',
             }} //object-fit:cover
             src={global.video.asset.url}
             // type="video/mp4"

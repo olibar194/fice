@@ -141,8 +141,8 @@ export default function Header({ ...props }) {
       style={shown ? { height: '99.9vh' } : { height: '0.1vh' }}
       className={`fixed z-20 flex  w-full justify-between `}
     >
-      <div className={`m-3 h-max  sm:m-4 sm:mt-6   `}>
-        <div className="m-1 w-32 cursor-pointer p-1	sm:w-60">
+      <div className={`mx-3 h-max`}>
+        <div className="m-1 w-40 cursor-pointer p-1	sm:w-60">
           <div className=" flex cursor-pointer items-center text-center text-gray-700">
             <h1 className="flex w-full justify-center">
               <a href={'/'} aria-label="Fice logo">
