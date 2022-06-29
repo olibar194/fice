@@ -140,10 +140,9 @@ export default function About({ page }) {
     })
   }
 
-  function setOpen() {
-    setIsOpen(true)
-  }
-  console.log(global)
+  // function setOpen() {
+  //   setIsOpen(true)
+  // }
 
   return (
     <section className="flex w-full flex-col items-center justify-center">
