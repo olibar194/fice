@@ -261,3 +261,25 @@ body::-webkit-scrollbar-thumb {
 .gris:hover {
   fill: rgb(87, 95, 104);
 }
+
+.card {
+  width: 16rem;
+  height: 16rem;
+}
+.imagen-card {
+  border-radius: 2rem;
+}
+.card2 {
+  width: 15rem;
+  height: 15rem;
+}
+.imagen-card2 {
+  border-radius: 2rem;
+}
+
+.formita-card {
+  position: absolute;
+  bottom: -5rem;
+  left: -1rem;
+  width: 130%;
+}

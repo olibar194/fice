@@ -6,9 +6,11 @@ import 'aos/dist/aos.css'
 import { useEffect, useState } from 'react'
 import useScrollBlock from '../../hooks/useScrollBlock'
 import Link from 'next/link'
-import { url } from 'inspector'
+// import { url } from 'inspector'
+import ReactCardFlip from 'react-card-flip'
+import Card from '../card'
 
-export default function About({ page }: any) {
+export default function About({ page }) {
   const { pageData: data, globalSettings: global } = page
   const [blockScroll, allowScroll] = useScrollBlock()
 
@@ -20,7 +22,7 @@ export default function About({ page }: any) {
   const [checkedState, setCheckedState] = useState(0)
   const [type, setType] = useState('trailer')
 
-  const openModal = (type: string, element: any) => {
+  const openModal = (type, element) => {
     blockScroll()
     setType(type)
     setCheckedState(element)
@@ -32,11 +34,11 @@ export default function About({ page }: any) {
     setIsOpen(false)
   }
 
-  function handleCheckedAnt(index: number) {
+  function handleCheckedAnt(index) {
     index !== 0 && setCheckedState(index - 1)
   }
 
-  function handleCheckedSig(index: number, len: number) {
+  function handleCheckedSig(index, len) {
     index + 1 < len && setCheckedState(index + 1)
   }
 
@@ -74,16 +76,16 @@ export default function About({ page }: any) {
 
   const myPortableTextComponents = {
     types: {
-      image: ({ value }: any) => {
+      image: ({ value }) => {
         return <img src={value.asset.url} />
       },
-      callToAction: ({ value, isInline }: any) =>
+      callToAction: ({ value, isInline }) =>
         isInline ? (
           <a href={value.url}>{value.text}</a>
         ) : (
           <div className="callToAction">{value.text}</div>
         ),
-      break: ({ value }: any) => {
+      break: ({ value }) => {
         const { style } = value
         if (style === 'lineBreak') {
           return <hr className="mx-8 my-4" />
@@ -101,7 +103,7 @@ export default function About({ page }: any) {
     },
 
     marks: {
-      link: ({ children, value }: any) => {
+      link: ({ children, value }) => {
         const rel = !value.href.startsWith('/')
           ? 'noreferrer noopener'
           : undefined
@@ -114,6 +116,33 @@ export default function About({ page }: any) {
     },
   }
 
+  // const [isOpen, setIsOpen] = useState(false)
+
+  const [isFlipped, setisFlipped] = useState({
+    card0: false,
+    card1: false,
+    card12: false,
+    card2: false,
+    card3: false,
+    card4: false,
+    card5: false,
+    card6: false,
+    card7: false,
+  })
+  const { card0, card1, card12, card2, card3, card4, card5, card6, card7 } =
+    isFlipped
+
+  function handleClick(e) {
+    let id = e.target.id
+    setisFlipped({
+      ...isFlipped,
+      [id]: !isFlipped[id],
+    })
+  }
+
+  function setOpen() {
+    setIsOpen(true)
+  }
   console.log(global)
 
   return (
@@ -147,6 +176,49 @@ export default function About({ page }: any) {
           </div>
         </div>
       </div>
+
+      <section className="my-8 flex min-h-screen flex-col items-center">
+        <h1 className="text-2xl font-bold">Equipx</h1>
+        <div className="- mb-16 block justify-center sm:flex sm:flex-wrap">
+          <div className="my-1 contents w-full px-2 sm:px-16 lg:w-full">
+            {global.crewMembers.map((value, index) => {
+              return (
+                <>
+                  <ReactCardFlip isFlipped={isFlipped['card' + index]}>
+                    <span
+                      id={`card${index}`}
+                      onMouseEnter={handleClick}
+                      onClick={handleClick}
+                      className=" z-20 mr-8 flex justify-center p-2"
+                      key="front"
+                    >
+                      <Card
+                        id={`card${index}`}
+                        img={value.image.asset.url}
+                        nombre={value.name}
+                        rol={'rol'}
+                      ></Card>
+                    </span>
+
+                    <div
+                      id={`card${index}`}
+                      onMouseLeave={handleClick}
+                      className="z-20 mr-8  flex justify-center p-2"
+                      key="back"
+                    >
+                      <Card
+                        id={`card${index}`}
+                        t1={`miembra${index}`}
+                        t2={''}
+                      ></Card>
+                    </div>
+                  </ReactCardFlip>
+                </>
+              )
+            })}
+          </div>
+        </div>
+      </section>
     </section>
   )
 }

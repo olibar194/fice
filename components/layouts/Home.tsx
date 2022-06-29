@@ -85,14 +85,14 @@ export default function Home({ page }: any) {
               {data.convo.call.categoryCall.map((value: any, index: any) => {
                 return (
                   <div key={index} className=" p-2">
-                    <button className="cursor-pointer  rounded border-2 border-emerald-700 bg-emerald-200 p-4">
-                      <Link
-                        href={`/2022/open-call${value.link}`}
-                        target={'_blank'}
-                      >
+                    <Link
+                      href={`/2022/open-call${value.link}`}
+                      target={'_blank'}
+                    >
+                      <button className="cursor-pointer  rounded border-2 border-emerald-700 bg-emerald-200 p-4">
                         {value.title.es}
-                      </Link>
-                    </button>
+                      </button>
+                    </Link>
                   </div>
                 )
               })}
