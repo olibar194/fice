@@ -24,17 +24,17 @@ export default {
       type: 'array',
       of: [{ type: 'reference', to: { type: 'role' } }],
     },
-    slugWithType('person', ''),
+    // slugWithType('person', ''),
     // {
     //   name: 'slug',
     //   title: 'URL',
     //   type: 'slug',
     //   description:
     //     'generar URL para disponer de un enlace a la página de la persona, sino dejar vacío',
-    //   options: {
-    //     source: 'name',
-    //     maxLength: 100,
-    //   },
+    //   // options: {
+    //   //   source: 'name',
+    //   //   maxLength: 100,
+    //   // },
     // },
     {
       name: 'image',

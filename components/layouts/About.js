@@ -3,15 +3,19 @@ import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import useScrollBlock from '../../hooks/useScrollBlock'
 import Link from 'next/link'
 // import { url } from 'inspector'
 import ReactCardFlip from 'react-card-flip'
 import Card from '../card'
+import colorContext from '../../contexts/colorContext'
 
 export default function About({ page }) {
   const { pageData: data, globalSettings: global } = page
+
+  const { color, setColor } = useContext(colorContext)
+
   const [blockScroll, allowScroll] = useScrollBlock()
 
   const [ref, isVisible] = useInView({ threshold: 0.7 })
@@ -146,7 +150,7 @@ export default function About({ page }) {
 
   return (
     <section className="flex w-full flex-col items-center justify-center">
-      <div className="embla relative min-h-screen w-full">
+      {/* <div className="embla relative min-h-screen w-full">
         <div className="embla__viewport relative">
           <video
             muted
@@ -174,16 +178,42 @@ export default function About({ page }) {
             </h1>
           </div>
         </div>
-      </div>
+      </div> */}
+      <motion.section
+        ref={ref}
+        variants={variants}
+        animate={isVisible ? 'visible' : 'hidden'}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="relative  w-full bg-cover bg-center"
+        style={{
+          height: '32rem',
+          maxHeight: '50rem',
+          // backgroundImage: `url(${pageData.image.asset.url})`,
+        }}
+      >
+        <h1
+          className="absolute bottom-8 left-16 text-center text-7xl font-bold "
+          style={{ color: `${color}` }}
+        >
+          SOBRE EL FICE
+        </h1>
+      </motion.section>
+      <section className="my-8 flex max-w-6xl flex-col items-center p-4">
+        <PortableText
+          value={global.info.es}
+          components={myPortableTextComponents}
+        />
 
-      <section className="my-8 flex min-h-screen flex-col items-center">
-        <h1 className="text-2xl font-bold">Equipx</h1>
+        <h1 className="my-8 text-2xl font-bold">Equipx</h1>
         <div className="- mb-16 block justify-center sm:flex sm:flex-wrap">
           <div className="my-1 contents w-full px-2 sm:px-16 lg:w-full">
             {global.crewMembers.map((value, index) => {
               return (
                 <>
-                  <ReactCardFlip isFlipped={isFlipped['card' + index]}>
+                  <ReactCardFlip
+                    key={index}
+                    isFlipped={isFlipped['card' + index]}
+                  >
                     <span
                       id={`card${index}`}
                       onMouseEnter={handleClick}

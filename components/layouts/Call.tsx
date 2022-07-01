@@ -3,12 +3,15 @@ import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import useScrollBlock from '../../hooks/useScrollBlock'
 import Link from 'next/link'
 import { url } from 'inspector'
+import colorContext from '../../contexts/colorContext'
 
 export default function Call({ page }: any) {
+  const { color, setColor } = useContext(colorContext)
+
   const { pageData, globalSettings: global } = page
   const [blockScroll, allowScroll] = useScrollBlock()
 
@@ -128,9 +131,16 @@ export default function Call({ page }: any) {
         style={{
           height: '32rem',
           maxHeight: '50rem',
-          backgroundImage: `url(${pageData.image.asset.url})`,
+          // backgroundImage: `url(${pageData.image.asset.url})`,
         }}
-      ></motion.section>
+      >
+        <h1
+          className="absolute bottom-8 left-16 text-center text-7xl font-bold "
+          style={{ color: `${color}` }}
+        >
+          OPEN CALL - 2022
+        </h1>
+      </motion.section>
 
       <section className=" max-w-6xl  p-4">
         {/* convocatoria info y buttons */}
@@ -155,7 +165,7 @@ export default function Call({ page }: any) {
                       value={value.info.es}
                       components={myPortableTextComponents}
                     />
-                    {value.files !== null && (
+                    {/* {value.files !== null && (
                       <div className="my-4">
                         <hr />
                         <h1 className="my-4 ">Archivos:</h1>
@@ -169,7 +179,7 @@ export default function Call({ page }: any) {
                           )
                         })}
                       </div>
-                    )}
+                    )} */}
                     <hr />
                     <h1 className="my-4">Link al formulario:</h1>
                     <a href={value.link_f} target={'_blank'}>
