@@ -138,7 +138,7 @@ export default function Call({ page }: any) {
           className="absolute bottom-8 left-16 text-center text-7xl font-bold "
           style={{ color: `${color}` }}
         >
-          OPEN CALL - 2022
+          OPEN CALL
         </h1>
       </motion.section>
 
