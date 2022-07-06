@@ -141,27 +141,29 @@ export default function Header({ ...props }) {
       style={shown ? { height: '99.9vh' } : { height: '0.1vh' }}
       className={`fixed z-20 flex  w-full justify-between `}
     >
-      <div className={`mx-3 h-max`}>
+      <div
+        className={`mx-2 flex h-24 items-center pb-4 sm:mx-6 sm:h-32 sm:pb-2`}
+      >
         <div className="m-1 w-40 cursor-pointer p-1	sm:w-60">
-          <div className=" flex cursor-pointer items-center text-center text-gray-700">
-            <h1 className="flex w-full justify-center">
-              <a href={'/'} aria-label="Fice logo">
-                {' '}
-                <img
-                  // style={{ width: ' 250px' }}
+          <a
+            href={'/'}
+            aria-label="Fice logo"
+            className="flex h-full w-full justify-center"
+          >
+            {' '}
+            <img
+              // style={{ width: ' 250px' }}
 
-                  src={
-                    !!props
-                      ? props.data.data?.globalSettings.logo.asset.url
-                      : '/images/fice2.png'
-                  }
-                  // src={'/images/fice2.png'}
-                  alt="Fice"
-                  className="w-full transform transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
-                />
-              </a>
-            </h1>
-          </div>
+              src={
+                !!props
+                  ? props.data.data?.globalSettings.logo.asset.url
+                  : '/images/fice2.png'
+              }
+              // src={'/images/fice2.png'}
+              alt="Fice"
+              className="h-maxhover:-translate-y-1 w-full transform transition duration-300 ease-in-out hover:scale-110"
+            />
+          </a>
         </div>
       </div>
       <div className={`m-3 flex h-max items-center justify-center  sm:m-4   `}>

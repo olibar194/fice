@@ -122,7 +122,6 @@ function getQueryFromSlug(slugArray = []) {
     },
     categoryCall[] {
         ...,
-        link_f {...},
         image {..., asset -> {...}},
         info {
           ...,

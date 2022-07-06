@@ -149,62 +149,31 @@ export default function About({ page }) {
   // }
 
   return (
-    <section className="flex w-full flex-col items-center justify-center">
-      {/* <div className="embla relative min-h-screen w-full">
-        <div className="embla__viewport relative">
-          <video
-            muted
-            autoPlay
-            loop
-            className="z-20"
-            style={{
-              height: '100vh',
-              width: '100%',
-              objectFit: 'cover',
-              // paddingTop: '20px',
-              // paddingBottom: '20px',
-            }} //object-fit:cover
-            src={global.video.asset.url}
-            // type="video/mp4"
-            // id={`video-${data?.id}`}
-          ></video>
-
-          <div className="absolute bottom-16 z-10 mx-8 text-center ">
-            <h1
-              style={{ color: `${data.color_p}` }}
-              className="text-xl uppercase   tracking-wider sm:text-6xl "
-            >
-              QUIENES SOMOS
-            </h1>
-          </div>
-        </div>
-      </div> */}
-      <motion.section
-        ref={ref}
-        variants={variants}
-        animate={isVisible ? 'visible' : 'hidden'}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        className="relative  w-full bg-cover bg-center"
-        style={{
-          height: '32rem',
-          maxHeight: '50rem',
-          // backgroundImage: `url(${pageData.image.asset.url})`,
-        }}
+    <section className="flex w-full max-w-6xl flex-col items-center justify-center p-2 sm:p-4">
+      <div
+        className="mx-auto max-w-5xl pt-32 text-center text-xl  sm:text-left"
+        style={{ color: `${color}` }}
       >
         <h1
-          className="absolute bottom-8 left-16 text-center text-7xl font-bold "
+          className="py-4 text-6xl font-bold sm:text-left sm:text-8xl sm:font-thin "
           style={{ color: `${color}` }}
         >
           SOBRE EL FICE
         </h1>
-      </motion.section>
+        <div className="p-2">
+          <PortableText
+            value={global.info.es}
+            components={myPortableTextComponents}
+          />
+        </div>
+      </div>
       <section className="my-8 flex max-w-6xl flex-col items-center p-4">
-        <PortableText
-          value={global.info.es}
-          components={myPortableTextComponents}
-        />
-
-        <h1 className="my-8 text-2xl font-bold">Equipx</h1>
+        <h1
+          className="my-8 text-2xl font-bold sm:text-3xl"
+          style={{ color: `${color}` }}
+        >
+          Equipx
+        </h1>
         <div className="- mb-16 block justify-center sm:flex sm:flex-wrap">
           <div className="my-1 contents w-full px-2 sm:px-16 lg:w-full">
             {global.crewMembers.map((value, index) => {

@@ -89,10 +89,7 @@ export default function EmblaCarousel({
       <div className="embla relative min-h-screen w-full">
         {call !== null ? (
           <section className="absolute right-4 bottom-16 z-20 mx-4 flex flex-col">
-            <h1
-              className="m-2 text-6xl uppercase"
-              style={{ color: `${color}` }}
-            >
+            <h1 className="m-2 text-6xl uppercase" style={{ color: `#7394b9` }}>
               Open call - 2022
             </h1>
             <Link href={call.slug.current}>
@@ -136,12 +133,21 @@ export default function EmblaCarousel({
             ))}
           </div>
         </div>
-        <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-        <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+        <PrevButton
+          onClick={scrollPrev}
+          enabled={prevBtnEnabled}
+          color={color}
+        />
+        <NextButton
+          onClick={scrollNext}
+          enabled={nextBtnEnabled}
+          color={color}
+        />
         <div className="absolute bottom-1 m-4 flex  w-full items-center justify-center">
           <div className="mr-8 flex w-auto justify-center sm:mr-12">
             {scrollSnaps.map((_, index) => (
               <DotButton
+                color={color}
                 key={index}
                 selected={index === selectedIndex}
                 onClick={() => scrollTo(index)}

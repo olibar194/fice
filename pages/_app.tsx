@@ -4,7 +4,8 @@ import Header from './../components/Header'
 import ThemeContext from '../contexts/blurContext'
 import ColorContext from '../contexts/colorContext'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+// import 'tw-elements'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [dark, setDark] = useState(false)
@@ -13,6 +14,19 @@ function MyApp({ Component, pageProps }: AppProps) {
       setDark(e)
     }, 300)
   }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      var aScript = document.createElement('script')
+      aScript.type = 'text/javascript'
+      aScript.src = './TW-ELEMENTS-PATH/dist/js/index.min.js'
+
+      document.head.appendChild(aScript)
+      aScript.onload = () => {
+        console.log('load')
+      }
+    }
+  }, [])
 
   const [color, setColor2] = useState('#222d29')
 
