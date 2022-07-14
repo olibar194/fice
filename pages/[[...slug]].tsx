@@ -8,6 +8,8 @@ import { getClient } from '../lib/sanity.server'
 import dynamic from 'next/dynamic'
 import Footer from './../components/footer'
 import About from '../components/layouts/About'
+import Meta from '../components/Meta'
+
 import Call from '../components/layouts/Call'
 const movieQuery = groq`
   *[_type == "movie" && slug.current == $slug][0] {
@@ -35,6 +37,8 @@ export default function Page({ data, preview }: any) {
 
   return (
     <>
+      <Meta />
+
       <section className="flex flex-col items-center">
         {docType === 'home' && <Home page={data} />}
         {docType === 'about' && <About page={data} />}

@@ -30,16 +30,19 @@ export const NextButton = ({ enabled, onClick, color }) => (
   </button>
 )
 
-export const DotButton = ({ selected, onClick, color }) => (
-  <button
-    type="button"
-    onClick={onClick}
-    style={{
-      backgroundColor: `${selected ? `${color}` : 'transparent'}`,
-      borderColor: `${color}`,
-    }}
-    className={`m-1 h-4  w-4 rounded-full ${
-      selected ? 'border-2 border-black bg-black' : ' border-2 border-black'
-    } p-2`}
-  ></button>
-)
+export const DotButton = ({ selected, onClick, color }) => {
+  console.log(color)
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        backgroundColor: `${selected ? `${color}` : 'transparent'}`,
+        borderColor: `${color}`,
+      }}
+      className={`m-1 h-4  w-4 rounded-full ${
+        selected ? 'border-2 border-black bg-black' : ' border-2 border-black'
+      } p-2`}
+    ></button>
+  )
+}

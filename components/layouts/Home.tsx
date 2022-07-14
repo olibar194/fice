@@ -15,54 +15,17 @@ export default function Home({ page }: any) {
   let images = data.gallery.images
   let title: any = []
 
-  const myPortableTextComponents = {
-    types: {
-      image: ({ value }: any) => {
-        return <img src={value.asset.url} />
-      },
-      callToAction: ({ value, isInline }: any) =>
-        isInline ? (
-          <a href={value.url}>{value.text}</a>
-        ) : (
-          <div className="callToAction">{value.text}</div>
-        ),
-      break: ({ value }: any) => {
-        const { style } = value
-        if (style === 'lineBreak') {
-          return <hr className="mx-8 my-4" />
-        }
-        if (style === 'spaceBreak') {
-          return (
-            <>
-              <br />
-            </>
-          )
-        } else {
-          return <br />
-        }
-      },
-    },
-
-    marks: {
-      link: ({ children, value }: any) => {
-        const rel = !value.href.startsWith('/')
-          ? 'noreferrer noopener'
-          : undefined
-        return (
-          <a href={value.href} rel={rel}>
-            {children}
-          </a>
-        )
-      },
-    },
-  }
   const { color, setColor } = useContext(colorContext)
 
   useEffect(() => {
-    data.color_p !== undefined && setColor(data.color_p)
-  }, [page])
+    data.color_p !== undefined && setColor(data.color_p, 'p')
 
-  console.log(data.convo.enabled)
+    data.color_s !== undefined && setColor(data.color_s, 's')
+
+    data.color_t !== undefined && setColor(data.color_t, 't')
+
+    data.color_t !== undefined && setColor('#222d29', 'd')
+  }, [page])
 
   return (
     <section className="flex w-full flex-col items-center justify-center">
@@ -79,7 +42,7 @@ export default function Home({ page }: any) {
           <div className="my-8 flex flex-col items-center justify-center">
             <h1
               className="text-center text-2xl font-bold capitalize tracking-wide"
-              style={{ color: `${color}` }}
+              style={{ color: `${color.d}` }}
             >
               Convocatoria abierta
             </h1>
@@ -105,7 +68,7 @@ export default function Home({ page }: any) {
           <div className="body-font container mx-auto my-4 px-8  sm:px-12  lg:rounded-xl lg:px-20">
             <h1
               className="text-center text-2xl font-bold capitalize tracking-wide"
-              style={{ color: `${color}` }}
+              style={{ color: `${color.d}` }}
             >
               apoyan
             </h1>
@@ -127,7 +90,7 @@ export default function Home({ page }: any) {
           <div className="body-font container mx-auto  px-8  sm:px-12 lg:rounded-xl lg:px-20">
             <h1
               className="text-center text-2xl font-bold capitalize tracking-wide"
-              style={{ color: `${color}` }}
+              style={{ color: `${color.d}` }}
             >
               acompañan
             </h1>

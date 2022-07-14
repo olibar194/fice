@@ -15,24 +15,17 @@ function MyApp({ Component, pageProps }: AppProps) {
     }, 300)
   }
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      var aScript = document.createElement('script')
-      aScript.type = 'text/javascript'
-      aScript.src = './TW-ELEMENTS-PATH/dist/js/index.min.js'
+  const [color, setColor2] = useState({})
 
-      document.head.appendChild(aScript)
-      aScript.onload = () => {
-        console.log('load')
-      }
-    }
-  }, [])
-
-  const [color, setColor2] = useState('#222d29')
-
-  const setColor = (e: string) => {
+  const setColor = (e: string, i: string) => {
     // setTimeout(() => {
-    setColor2(e)
+    // let arr = ['','','']
+
+    setColor2({
+      ...color,
+      [i]: e,
+    })
+    console.log(color)
     // }, 300)
   }
 
